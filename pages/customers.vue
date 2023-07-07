@@ -113,10 +113,8 @@ export default {
       const data = new Blob([excelBuffer], { type: "application/octet-stream" });
       const fileName = "students.xlsx";
       if (navigator.msSaveBlob) {
-        // For IE
         navigator.msSaveBlob(data, fileName);
       } else {
-        // For modern browsers
         const link = document.createElement("a");
         link.href = window.URL.createObjectURL(data);
         link.download = fileName;

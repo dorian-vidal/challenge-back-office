@@ -3,19 +3,18 @@
     <c-svg-icons />
 
     <!-- Loader starts-->
-    <div class="loader-wrapper">
+    <div class="loader-wrapper" >
       <div class="theme-loader">
         <div class="loader-p"></div>
       </div>
     </div>
     <!-- Loader ends-->
-    <div class="page-wrapper" id="pageWrapper">
-      <div class="page-main-header">
-        <MainHearder />
+    <div class="page-wrapper" id="pageWrapper" >
+        <div class="page-main-header" v-if="$route.name !== 'index'"> <MainHearder />
       </div>
-      <div class="page-body-wrapper null">
+      <div class="page-body-wrapper null" >
         <!-- Page Sidebar Start-->
-        <MainNav />
+        <div v-if="$route.name !== 'index'"><MainNav /></div>
         <!-- Page Sidebar Ends-->
         <div class="page-body pt-[30px] lg:pt-[100px]">
           <transition name="fade">
