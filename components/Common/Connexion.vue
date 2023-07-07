@@ -23,16 +23,7 @@
             class="mb-12 border-b-2 md:mr-8 border-primary-vert1"
             v-model="username"
           />
-          <base-input-text
-            type="password"
-            namefor="password"
-            label="Mot de passe"
-            password-reveal
-            placeholder=" "
-            :required="true"
-            v-model="password"
-            class="border-b-2 md:mr-8 border-primary-vert1"
-          />
+         
         </div>
         <b-notification v-if="error" type="is-warning">
           {{ error }}
@@ -42,8 +33,7 @@
           v-if="this.success"
           class="px-8 py-8 text-primary-vert1 md:px-12 md:py-12"
         >
-          Merci, votre message a bien été envoyé. <br />
-          Un de nos conseillers vous contactera sous 72h.
+          E mail envoyé avec succes !
         </p>
         <p v-if="this.error" class="px-8 py-8 text-red-500 md:px-12 md:py-12">
           Ah ! une erreur est survenue...
@@ -53,6 +43,7 @@
           class="flex justify-between py-8 mt-8 bg-transparent border-t border-gray-100 rounded-b md:px-12 bg-grey-light"
         >
           <t-button
+          @click="login()"
             type="submit"
             variant="primary"
             class="w-full py-3 transitions-colors"
@@ -61,11 +52,7 @@
           </t-button>
         </div>
       </form>
-      <div class="mx-auto text-center">
-        <nuxt-link class="inline-blok t-link" :to="url_lien">{{
-          lien
-        }}</nuxt-link>
-      </div>
+     
     </div>
   </section>
 </template>
@@ -111,20 +98,20 @@ export default {
     };
   },
   methods: {
-    async login() {
-      try {
-        await this.$auth.loginWith("local", {
-          data: {
-            username: this.username,
-            password: this.password,
-          },
-        });
+    login() {
+      const email = document.getElementById('email').value;
 
-        this.$router.push("/");
-      } catch (e) {
-        this.error = e.response.data.message;
-      }
-    },
+      axios.post("https://mt4challenge.onrender.com/auth/login", this.form )
+        .then((response) => {
+          this.success = true;
+          this.error = false;
+          console.log(response)
+        })
+        .catch((error) => {
+          this.success = false;
+          this.error = true;
+        });
+    }
     // MODAL / FORM
     // submitParents() {
     //   axios

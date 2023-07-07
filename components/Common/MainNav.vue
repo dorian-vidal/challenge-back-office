@@ -33,7 +33,7 @@
               </div>
             </li>
             <li class="dropdown">
-              <NuxtLink to="/" class="nav-link menu-title"
+              <NuxtLink to="/dashboard" class="nav-link menu-title"
                 ><svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
