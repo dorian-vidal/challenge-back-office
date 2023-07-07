@@ -1902,19 +1902,19 @@ span.twitter-typeahead {
   }
 }
 
-@media screen and (min-width: 1200px) and(max-width:1680px) {
-  .dashboard-default-sec,
-  .dashboard-2-main {
-    .card-header {
-      .header-top {
-        display: block !important;
-        .center-content {
-          margin-top: 5px;
-        }
-      }
-    }
-  }
-}
+// @media screen and (min-width: 1200px) and(max-width:1680px) {
+//   .dashboard-default-sec,
+//   .dashboard-2-main {
+//     .card-header {
+//       .header-top {
+//         display: block !important;
+//         .center-content {
+//           margin-top: 5px;
+//         }
+//       }
+//     }
+//   }
+// }
 @media screen and (min-width: 1200px) and (max-width: 1365px) {
   .des-xl-25 {
     max-width: 25%;

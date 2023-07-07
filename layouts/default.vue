@@ -22,7 +22,7 @@
           <nuxt class="page-content" />
           </transition>
         </div>
-        <Footer />
+        <!-- <Footer /> -->
       </div>
     </div>
   </main>
