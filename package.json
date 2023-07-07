@@ -28,7 +28,8 @@
     "tailwindcss-gradients": "^3.0.0",
     "unique-slug": "^2.0.2",
     "vue-content-loader": "0.2",
-    "vue-tailwind": "^2.4.2"
+    "vue-tailwind": "^2.4.2",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.15.0",
