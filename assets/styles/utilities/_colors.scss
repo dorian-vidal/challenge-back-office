@@ -1,0 +1,19 @@
+@each $i, $color in $colors {
+	.u-#{$i}{ color: #{$color} }
+	.u-bg-#{$i}{ background-color: #{$color} }
+	.u-fill-#{$i}{ fill: #{$color} }
+	.u-stroke-#{$i}{ stroke: #{$color}; fill: none; stroke-width: 1px }
+	.u-border-#{$i}{ border-color: #{$color} }
+}
+
+//@each $key, $bp in $breakpoints {
+//	@media ( min-width: #{$bp} ) {
+//		@each $i, $color in $colors {
+//			.u-#{$i}--#{$key}{ color: #{$color}; }
+//			.u-bg-#{$i}--#{$key}{ background-color: #{$color}; }
+//			.u-fill-#{$i}--#{$key}{ fill: #{$color}; }
+//			.u-stroke-#{$i}--#{$key}{ stroke: #{$color}; fill: none; stroke-width: 1px; }
+//			.u-border-#{$i}--#{$key}{ border-color: #{$color}; }
+//		}
+//	}
+//}

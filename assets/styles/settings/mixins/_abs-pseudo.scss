@@ -1,0 +1,9 @@
+@mixin abs-pseudo($top: 0, $right: auto, $bottom: auto, $left: 0, $z-index: 0) {
+	content: "";
+	position: absolute;
+	z-index: $z-index;
+	top: $top;
+	right: $right;
+	bottom: $bottom;
+	left: $left;
+}

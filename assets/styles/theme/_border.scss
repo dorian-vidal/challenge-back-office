@@ -1,0 +1,13 @@
+/* purgecss start ignore */
+.t-border {
+  &:after {
+    height: 100%;
+    width: 100%;
+    border: 2px solid;
+    border-image-slice: 1;
+    border-image-source: $gradient-green;
+    z-index: 2;
+    pointer-events: none;
+  }
+}
+/* purgecss end ignore */

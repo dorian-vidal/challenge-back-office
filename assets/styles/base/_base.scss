@@ -1,0 +1,74 @@
+/*
+	This is for base elements or general declarations
+	Page-specific classes should probably go in /pages, unless you have multiple page-specific classes on the body,
+	this is probably the place for them
+*/
+
+:root {
+  --app-height: 100vh;
+}
+
+
+* {
+  box-sizing: border-box;
+
+  &::selection {
+    background-color: #1fc6c1;
+    color: $white;
+  }
+}
+
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+// Body reset
+$min_width: 1440px;
+$max_width: 4320px;
+$min_font: 12px;
+$max_font: 16px;
+
+html {
+  font-size: 10px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+
+  // @include mq($from: wide) {
+  //   @include fluid-type($min_width, $max_width, $min_font, $max_font);
+  // }
+}
+
+body {
+  font-family: $poppins !important;
+  color: $black;
+  @extend %text;
+}
+
+code {
+  padding: 1em;
+  background: #444;
+  color: orangered;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+button {
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  outline: none;
+  color: currentColor;
+}
+
+ul,
+ol {
+  padding-left: 0;
+  margin: 0;
+}
+
+img,
+picture {
+  width: 100%;
+}

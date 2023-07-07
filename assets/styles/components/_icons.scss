@@ -1,0 +1,82 @@
+/* ==========================================
+Single-colored icons can be modified like so:
+.c-icon-name {
+ fonc-size: 32px;
+ color: red;
+}
+Typically you'll want to do something like this :
+svg.c-icon.white.c-icon--xl > use
+========================================== */
+.c-icon {
+  @extend %iconbase;
+
+  &--auto {
+    width: auto;
+    height: auto;
+  }
+
+  // sizes
+  &--xs{
+    width: 8px;
+    height: 8px;
+  }
+
+  &--sm{
+    width: 12px;
+    height: 12px;
+  }
+
+  &--md{
+    width: 16px;
+    height: 16px;
+  }
+
+  &--lg{
+    width: 26px;
+    height: 26px;
+  }
+
+  &--xl{
+    width: 32px;
+    height: 32px;
+  }
+
+  &--xxl{
+    width: 56px;
+    height: 56px;
+  }
+  &--logo{
+    width: 9.7rem;
+    height: 3.5rem;
+  }
+  &--logo-xl{
+    width: 13rem;
+    height: 6rem;
+  }
+
+  &:not(.c-icon--multicolor){
+    stroke: currentColor;
+    fill: currentColor;
+    svg path,
+    svg rect,
+    svg circle,{
+      fill: inherit;
+    }
+  }
+
+  &--round {
+
+    > svg {
+      position: relative;
+      z-index: 1;
+    }
+
+    &:before {
+      background-color: currentColor;
+      @include abs-pseudo(0,0,0,0,0);
+      height: 100%;
+      width: 100%;
+      border-radius: 50%;
+    }
+  }
+}

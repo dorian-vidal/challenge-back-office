@@ -1,0 +1,45 @@
+$transition: opacity 450ms $ease-in-out-quad;
+
+.t-text-hover {
+	position: relative;
+
+	> span {
+		transform: none;
+		transition: $transition;
+		opacity: 1;
+	}
+
+	&:after {
+		content: attr(data-text);
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		@extend %text-gradient;
+		transition: $transition;
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	&:hover {
+		@media (hover: hover) {
+			> span {
+				opacity: 0;
+			}
+
+			&:after {
+				opacity: 1;
+			}
+		}
+	}
+
+	&.is-active {
+		> span {
+			opacity: 0;
+		}
+
+		&:after {
+			opacity: 1;
+		}
+	}
+}

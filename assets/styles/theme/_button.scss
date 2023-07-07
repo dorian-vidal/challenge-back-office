@@ -1,0 +1,123 @@
+.btn {
+  @extend %button;
+  position: relative;
+  overflow: hidden;
+  padding: 1rem 2.4rem;
+  white-space: nowrap;
+  transition: color 150ms $ease-in-out-quint;
+  color: $white;
+  border-radius: 4px;
+  border: none !important;
+  background: $gradient-green2pink;
+  background-image: $gradient-green2pink;
+
+  &:after,
+  &:before {
+    @include abs-pseudo(0, 0, 0, 0);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  &:after {
+    right: -1px;
+    width: calc(100% + 1px);
+    background: $pink;
+    // background-image: $gradient-green2pink-inverse;
+    border: 1px solid $pink;
+    transition: transform 500ms $ease-in-out-quint;
+    transform: scaleY(0) translateZ(0);
+    transform-origin: left;
+  }
+
+  span {
+    position: relative;
+    z-index: 1;
+  }
+
+  &:hover {
+    @media (hover: hover) {
+      color: $white;
+
+      &:after {
+        transform: scaleY(1) translateZ(0);
+        transform-origin: right;
+      }
+    }
+  }
+
+
+
+  &--secondary-white {
+    color: $white;
+    background: transparent;
+    border: 2px solid $white;
+    span {
+      color: $white;
+    }
+    &:after {
+      background: $pink;
+      border: 2px solid $pink;
+    }
+
+    &:hover {
+      color: $pink !important;
+      border: 2px solid $pink;
+
+      span {
+        color: $white;
+      }
+    }
+  }
+  &--secondary-pink {
+    color: $pink;
+    background: $pink;
+    border: 2px solid $pink;
+    span {
+      color: $pink;
+    }
+    &:after {
+      background: $pink;
+      border: 2px solid $pink;
+    }
+
+    &:hover {
+      color: $pink !important;
+      border: 2px solid $pink;
+
+      span {
+        color: $white;
+      }
+    }
+  }
+
+  &--tertiary {
+    color: $green1;
+    background-color: transparent !important;
+    background: transparent !important;
+    background-image: transparent !important;
+
+    &:before {
+      height: 100%;
+      width: 100%;
+      border: 2px solid;
+      border-image-slice: 1;
+      // border-image-source: $green1;
+      border: 1px solid $green1;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    &:after {
+      right: -1px;
+      width: calc(100% + 1px);
+      background: none;
+      background-image: $gradient-green;
+      border: 1px solid $gradient-green;
+      transition: transform 300ms $ease-in-out-quint;
+      transform: scaleY(0) translateZ(0);
+      transform-origin: left;
+    }
+  }
+}
+
+

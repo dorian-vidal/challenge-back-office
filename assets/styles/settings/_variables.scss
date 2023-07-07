@@ -1,0 +1,93 @@
+
+$bp-mobile: 576px; //sm
+$bp-tablet: 768px; //md
+$bp_landTablet: 992px; //lg
+$bp-desktop: 1080px; //xl
+$bp-wide: 1440px; // < fix && > fluide
+
+
+// https://github.com/sass-mq/sass-mq
+// example use :
+//	 	@include mq($from: mobile, $until: tablet) {
+//        background: red;
+//      }
+$mq-breakpoints: (
+mobile:  $bp-mobile,
+tablet:  $bp-tablet,
+desktop: $bp-desktop,
+wide:    $bp-wide
+);
+
+$breakpoints: (
+sm: $bp-mobile,
+md: $bp-tablet,
+lg: $bp-landTablet,
+xl: $bp-desktop,
+  //xs:  	$bp-mobile,
+);
+
+// $screen-xs: ;
+$screen-sm: $bp-tablet;
+$screen-md: $bp-desktop;
+$screen-lg: $bp-wide;
+
+// fonts
+$nunito: 'nunito', sans-serif;
+$poppins: 'poppins', sans-serif;
+
+$bold: 700;
+$regular: 400;
+$medium: 500;
+$semi: 600;
+
+// spaces
+$spacing-xl: 12rem;
+$spacing-lg: 6rem;
+$spacing-md: 3rem;
+$spacing-sm: 2rem;
+$spacing-xs: 1.5rem;
+$spacing-xxs: 1rem;
+$spacing-0: 	0;
+$spacings: (
+"xl": $spacing-xl,
+"lg": $spacing-lg,
+"md": $spacing-md,
+"sm": $spacing-sm,
+"xs": $spacing-xs,
+"xxs": $spacing-xxs,
+"0":  $spacing-0,
+"auto": 'auto'
+);
+
+// gradient
+$gradient-green: linear-gradient(90deg, #20D8D2 0%, #8CECC7 100%);
+$gradient-green2: linear-gradient(0deg, #20D8D2 0%, #8CECC7 100%);
+$gradient-green2pink: linear-gradient(90deg, #25DAD2 0%, #B21DCB 100%);
+$gradient-green2pink-inverse: linear-gradient(0deg, #25DAD2 0%, #B21DCB 100%);
+$gradientStop1: #D6B07F;
+$gradientStop2: #82624F;
+
+//Colors
+$black: #2C2C2C;
+$white: #ffffff;
+$grey: #848484;
+$blue: #00aeef;
+$green1: #20D8D2;
+$green2: #8CECC7;
+$blue: #00aeef;
+$pink: #A820D8;
+$error: #FF4B4B;
+$success: #47FD59;
+
+$colors: (
+"black": $black,
+"white": $white,
+"grey": $white,
+"green1": $green1,
+"green2": $green2,
+"pink": $pink,
+"success": $success,
+"error": $error,
+"blue": $blue,
+)
+

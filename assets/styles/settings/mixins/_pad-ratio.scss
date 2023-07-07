@@ -1,0 +1,27 @@
+@mixin pad-ratio($x, $y) {
+  @supports (aspect-ratio: inherit) {
+    aspect-ratio: $x / $y;
+  }
+  @supports not(aspect-ratio: inherit) {
+    position: relative;
+    overflow: hidden;
+
+    &:before {
+      content: '';
+      display: block;
+      padding-top: percentage($y / $x);
+    }
+
+    > a > picture,
+    > a > img,
+    > div,
+    > video,
+    > picture,
+    > figure,
+    > img {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+}

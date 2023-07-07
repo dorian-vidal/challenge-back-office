@@ -1,0 +1,119 @@
+/*
+
+    Common placeholders, used in typography,
+    hover effects.
+
+ */
+
+// ==================== Typography ====================
+
+%title {
+  font-size: 2.4rem;
+  line-height: 2.8rem;
+  letter-spacing: 0.5rem;
+  font-family: $nunito;
+  text-transform: uppercase;
+  font-weight: $regular;
+
+  @include mq($from: desktop) {
+    font-size: 3.4rem;
+    line-height: 4.2rem;
+  }
+
+  &--lg {
+    font-size: 2.4rem;
+    line-height: 2.8rem;
+    letter-spacing: 0.36rem;
+    font-family: $nunito;
+    text-transform: uppercase;
+    font-weight: $regular;
+
+    @include mq($from: tablet) {
+      font-size: 6rem;
+      line-height: 6.8rem;
+      letter-spacing: 0.9rem;
+    }
+  }
+}
+
+%text {
+  font-size: 1.3rem;
+  line-height: 1.8rem;
+  font-family: $poppins;
+
+  @include mq($from: desktop) {
+    font-size: 1.4rem;
+    line-height: 1.5;
+  }
+}
+
+%text-gradient {
+  color: $pink;
+  @supports ((background-clip: text) or (-webkit-background-clip: text)) and
+    ((text-fill-color: transparent) or (-webkit-text-fill-color: transparent)) {
+    background: $gradient-green2pink;
+    background-image: $gradient-green2pink;
+    background-size: cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-box-decoration-break: clone;
+    text-fill-color: transparent;
+  }
+}
+
+%subhead {
+  font-family: $poppins;
+  font-size: 0.9rem;
+  line-height: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+
+  @include mq($from: $bp-landTablet) {
+    font-size: 1.1rem;
+    line-height: 1.1rem;
+  }
+}
+// ==================== Buttons ====================
+
+%button {
+  display: inline-block;
+  font-family: $poppins;
+  font-size: 1.8rem;
+  font-weight: $semi;
+  appearance: none;
+  line-height: 1.8;
+  text-align: center;
+  vertical-align: middle;
+  // background: $gradient-green2pink;
+  // background-image: $gradient-green2pink;
+  padding: calc(#{$spacing-xs} + 2px) $spacing-sm;
+}
+
+%iconbase {
+  display: inline-block;
+  vertical-align: baseline;
+  stroke-width: 0;
+  width: 1em;
+  height: 1em;
+  transition: all 0.3s ease;
+}
+
+// ==================== Layout ====================
+
+%resetmargin {
+  margin: 0;
+  padding: 0;
+}
+
+%panel-base {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  height: var(--app-height);
+  width: 75%;
+  z-index: 1000;
+  background-color: $white;
+}
