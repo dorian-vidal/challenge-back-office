@@ -11,7 +11,7 @@
       </div>
       <button class="btn btn-export mb-4 text-white" @click="exportToExcel">Exporter vers Excel</button>
 
-      <t-table
+      <t-table v-if="tableData"
         :headers="['Prénom', 'Nom', 'Email', 'Score']"
         :data="tableData"
       >
@@ -73,35 +73,42 @@ export default {
   },
   data() {
     return {
-      tableData: [
-        {
-          firstname: "Alfonso",
-          lastname: "Bribiesca",
-          email: "alfonso@vexilo.com",
-          score: 9999,
-        },
-        {
-          firstname: "Saida",
-          lastname: "Redondo",
-          email: "saida@gmail.com",
-          score: 9999,
-        },
-        {
-          firstname: "Regina",
-          lastname: "Bribiesca",
-          email: "regina@gmail.com",
-          score: 9999,
-        },
-        {
-          firstname: "Ricardo",
-          lastname: "Martinez",
-          email: "rickyrickky@gmail.com",
-          score: 9999,
-        },
-      ],
+      tableData: null,
     };
   },
+  mounted(){
+    this.getUsers()
+  },
   methods: {
+    getUsers() {
+      this.tableData= [{
+        firstname : 'mt4', 
+        lastname: 'mt4', 
+        email: 'amanda@gmail.com',
+        score: 1
+      },
+      {
+        firstname : 'mt4', 
+        lastname: 'mt4', 
+        email: 'amanda@gmail.com',
+        score: 1
+      },
+      {
+        firstname : 'mt4', 
+        lastname: 'mt4', 
+        email: 'amanda@gmail.com',
+        score: 1
+      }
+]
+      
+    // axios.get('URL_DE_L_API')
+    //   .then(response => {
+    //     this.tableData = response.data;
+    //   })
+    //   .catch(error => {
+    //     console.error(error);
+    //   });
+  },
     exportToExcel() {
       const worksheet = XLSX.utils.json_to_sheet(this.tableData);
       const workbook = XLSX.utils.book_new();

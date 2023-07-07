@@ -10,30 +10,9 @@
         />
       </div>
 
-      <t-table
-        :headers="['Nom', 'ID fonctionelle', 'Nombre étudiants']"
-        :data="[
-          {
-            name: 'Alfonso Bribiesca',
-            slug: 'alfonso@vexilo.com',
-            numbers: 9999,
-          },
-          {
-            name: 'Saida Redondo',
-            slug: 'saida@gmail.com',
-            numbers: 1500,
-          },
-          {
-            name: 'Regina Bribiesca',
-            slug: 'regina@gmail.com',
-            numbers: -200.5,
-          },
-          {
-            name: 'Ricardo Martinez',
-            slug: 'rickyrickky@gmail.com',
-            numbers: 0.0,
-          },
-        ]"
+      <t-table v-if="tableData"
+        :headers="['Nom', 'Id fonctionnel', `Nombre d'étudiants`]"
+        :data="tableData"
       >
         <template slot="row" slot-scope="props">
           <tr
@@ -49,7 +28,7 @@
               {{ props.row.slug }}
             </td>
             <td :class="props.tdClass">
-              {{ props.row.numbers }}
+              {{ props.row.students_count }}
             </td>
           </tr>
         </template>
@@ -150,6 +129,7 @@ export default {
   data() {
     return {
       showModal: false,
+      tableData: null,
       form: {
         name: "",
         lastname: "",
@@ -167,7 +147,39 @@ export default {
       },
     };
   },
+  mounted(){
+    this.getUsers()
+  },
   methods: {
+    getUsers() {
+      this.tableData= [{
+        name : 'mt4', 
+        slug: 'mt4', 
+        students_count: 1
+      },
+      {
+        name : 'mt5', 
+        slug: 'mt5', 
+        students_count: 2
+      },
+      {
+        name : 'mt6', 
+        slug: 'mt6', 
+        students_count: 3
+      }
+]
+console.log(this.tableData)
+
+      
+  //   axios.get('URL_DE_L_API')
+  //     .then(response => {
+  //       this.tableData = response.data;
+  //     })
+  //     .catch(error => {
+  //       console.error(error);
+  //     });
+  },
+
     updateValue: function (value) {
       this.$emit("input", value);
     },
