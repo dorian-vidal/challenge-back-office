@@ -9,35 +9,11 @@
           bookmark_active="true"
         />
       </div>
+      <button class="btn btn-export mb-4 text-white" @click="exportToExcel">Exporter vers Excel</button>
 
       <t-table
         :headers="['Prénom', 'Nom', 'Email', 'Score']"
-        :data="[
-          {
-            firstname: 'Alfonso Bribiesca',
-            lastname: 'alfonso@vexilo.com',
-            email: 'alfonso@vexilo.com',
-            score: 9999,
-          },
-          {
-            firstname: 'Saida Redondo',
-            lastname: 'saida@gmail.com',
-            email: 'alfonso@vexilo.com',
-            score: 9999,
-          },
-          {
-            firstname: 'Regina Bribiesca',
-            lastname: 'regina@gmail.com',
-            email: 'alfonso@vexilo.com',
-            score: 9999,
-          },
-          {
-            firstname: 'Ricardo Martinez',
-            lastname: 'rickyrickky@gmail.com',
-            email: 'alfonso@vexilo.com',
-            score: 9999,
-          },
-        ]"
+        :data="tableData"
       >
         <template slot="row" slot-scope="props">
           <tr
@@ -87,62 +63,71 @@
 </template>
 
 <script>
+import * as XLSX from "xlsx";
 import BreadcrumbBookmark from "@/components/Common/BreadcrumbBookmark";
-import axios from "axios";
+
 export default {
-  name: "students",
+  name: "Students",
   components: {
     BreadcrumbBookmark,
   },
   data() {
     return {
-      showModal: false,
-      form: {
-        name: "",
-        lastname: "",
-        phone: "",
-        mail: "",
-        profil: "",
-        text: "",
-      },
-    };
-  },
-  head() {
-    return {
-      bodyAttrs: {
-        class: "drivers",
-      },
+      tableData: [
+        {
+          firstname: "Alfonso",
+          lastname: "Bribiesca",
+          email: "alfonso@vexilo.com",
+          score: 9999,
+        },
+        {
+          firstname: "Saida",
+          lastname: "Redondo",
+          email: "saida@gmail.com",
+          score: 9999,
+        },
+        {
+          firstname: "Regina",
+          lastname: "Bribiesca",
+          email: "regina@gmail.com",
+          score: 9999,
+        },
+        {
+          firstname: "Ricardo",
+          lastname: "Martinez",
+          email: "rickyrickky@gmail.com",
+          score: 9999,
+        },
+      ],
     };
   },
   methods: {
-    updateValue: function (value) {
-      this.$emit("input", value);
-    },
-
-    // MODAL / FORM
-    submitParents() {
-      axios
-        .post("/contact", this.form)
-        .then((res) => {
-          //Perform Success Action
-          console.log("res", res);
-          this.status = "res";
-          this.$router.push("/");
-          this.success = true;
-          setTimeout(() => {
-            this.showModal = false;
-          }, 3000);
-        })
-        .catch((error) => {
-          // error.response.status Check status code
-          console.log("error", error);
-          this.status = "error";
-          this.success = true;
-        })
-        .finally(() => {
-          //Perform action in always
-        });
+    exportToExcel() {
+      const worksheet = XLSX.utils.json_to_sheet(this.tableData);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+      const excelBuffer = XLSX.write(workbook, {
+        bookType: "xlsx",
+        type: "array",
+      });
+      const data = new Blob([excelBuffer], { type: "application/octet-stream" });
+      const fileName = "students.xlsx";
+      if (navigator.msSaveBlob) {
+        // For IE
+        navigator.msSaveBlob(data, fileName);
+      } else {
+        // For modern browsers
+        const link = document.createElement("a");
+        link.href = window.URL.createObjectURL(data);
+        link.download = fileName;
+        link.click();
+      }
     },
   },
 };
 </script>
+<style>
+.btn-export:after{
+  z-index : -1 
+}
+</style>
