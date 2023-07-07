@@ -19,7 +19,7 @@
         <!-- Page Sidebar Ends-->
         <div class="page-body pt-[30px] lg:pt-[100px]">
           <transition name="fade">
-          <nuxt class="page-content" />
+            <nuxt class="page-content" />
           </transition>
         </div>
         <!-- <Footer /> -->
