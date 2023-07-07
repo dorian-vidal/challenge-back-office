@@ -8,7 +8,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "Vroom Back Office",
+    title: "mt4challenge Back Office",
     htmlAttrs: {
       lang: "fr",
     },
@@ -19,48 +19,10 @@ export default {
       { hid: "description", name: "description", content: "" },
       { name: "format-detection", content: "telephone=no" },
       { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "Vroom" },
-      {
-        name: "description",
-        content:
-          "Nous accompagnons vos enfants selon leur besoins quotidiens. Notre service vous assure pleine tranquillité et sérénité tout au long de la journée.",
-      },
-      {
-        name: "og:title",
-        content: "Vroom - Back Office",
-      },
-      {
-        name: "og:desciption",
-        content:
-          "Nous accompagnons vos enfants selon leur besoins quotidiens. Notre service vous assure pleine tranquillité et sérénité tout au long de la journée.",
-      },
-      {
-        name: "og:locale",
-        content: "fr_FR",
-      },
-      {
-        name: "og:image",
-        content: "",
-      },
-      {
-        property: "og:url",
-        content: ``,
-      },
-      {
-        // a modifier avec le bon url : https://search.google.com/search-console/welcome?hl=fr
-        name: "google-site-verification",
-        content: "",
-      },
+      { property: "og:site_name", content: "mt4challenge" },
     ],
 
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
-  },
-  manifest: {
-    name: "Vroom Back Office",
-    short_name: "VroomKids Nuxt",
-    description: "VroomKids manifest description",
-    theme_color: "#2C3E50",
-    start_url: "/",
   },
   babel: {
     babelrc: true,
@@ -126,7 +88,6 @@ export default {
     "@nuxtjs/auth",
     "@nuxt/image",
     "nuxt-svg-loader",
-    
   ],
   // Purge module configuration: https://purgecss.com/guides/nuxt.html
   purgeCSS: {
@@ -137,14 +98,12 @@ export default {
   },
   // Nuxt Axios
   axios: {
-    baseURL: 'http://localhost:3000/',
+    baseURL: "http://localhost:3000/",
     proxyHeaders: false,
     credentials: false,
-    proxy: true
+    proxy: true,
   },
-  proxy: {
-    '/api/': { target: 'https://hetic-vroom-api-conducteurs.one-website.com/', pathRewrite: {'^/api/': ''} }
-  },
+
   // auth: {
   //   localStorage: false,
   //   cookie: {
@@ -176,9 +135,4 @@ export default {
     ],
   },
   loading: false,
-  publicRuntimeConfig: {
-    assetsPath: process.env.NODE_ASSETS_PATH,
-    baseURL: process.env.BASE_URL || "http://localhost:80",
-    nodeEnv: process.env.NODE_ENV || "development",
-  },
 };

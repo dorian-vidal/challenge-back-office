@@ -23,23 +23,12 @@ Vue.component("base-message-item", MessageItem);
 // COMMON (layout, Header, footer etc..)
 
 import SvgIcons from "~/components/Common/SvgIcons.vue";
-import Welcome from "~/components/Common/Welcome.vue";
 import Connexion from "~/components//Common/Connexion";
 
-
 Vue.component("c-svg-icons", SvgIcons);
-Vue.component("bloc-welcome", Welcome);
 Vue.component("connexion", Connexion);
 
 // STRATES
-
-import StrateText from "~/components/Strates/StrateText.vue";
-import Card from "~/components/Strates/Card.vue";
-import MessagesInbox from "~/components/Strates/MessagesInbox.vue";
-
-Vue.component("strate-text", StrateText);
-Vue.component("bloc-card", Card);
-Vue.component("bloc-messages-inbox", MessagesInbox);
 
 // COMPONENTS
 

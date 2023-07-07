@@ -3,12 +3,12 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-6 footer-copyright">
-          <p class="mb-0">Copyright 2022 © Vroom All rights reserved.</p>
+          <p class="mb-0">Copyright 2022 © mt4challenge All rights reserved.</p>
         </div>
         <div class="col-md-6">
           <p class="pull-right mb-0">
             Hand crafted &amp; made with
-            <i class="fa fa-heart font-secondary"></i> by Vroom
+            <i class="fa fa-heart font-secondary"></i> by mt4challenge
           </p>
         </div>
       </div>

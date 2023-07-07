@@ -4,18 +4,18 @@
       <div class="logo-wrapper">
         <NuxtLink to="/"
           ><img
-            style="width: 102px"
+            style="width: 50px"
             class="img-fluid"
-            src="@/assets/images/logo/logo-vroom-black.png"
+            src="@/assets/images/logo/challengemt4.png"
             alt=""
         /></NuxtLink>
       </div>
       <div class="dark-logo-wrapper">
         <NuxtLink to="/"
           ><img
-            style="width: 102px"
+            style="width: 50px"
             class="img-fluid"
-            src="@/assets/images/logo/logo-vroom-light.png"
+            src="@/assets/images/logo/challengemt4.png"
             alt=""
         /></NuxtLink>
       </div>
@@ -461,8 +461,14 @@
           </ul>
         </li>
         <li class="p-0 onhover-dropdown">
-          <t-button tagName="a" href="login_two.html" variant="primary" class="w-full py-3 btn btn-primary-light">
-            <span class="flex text-white"><svg
+          <t-button
+            tagName="a"
+            href="login_two.html"
+            variant="primary"
+            class="w-full py-3 btn btn-primary-light"
+          >
+            <span class="flex text-white"
+              ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -476,8 +482,10 @@
               >
                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                 <polyline points="16 17 21 12 16 7"></polyline>
-                <line x1="21" y1="12" x2="9" y2="12"></line></svg
-              > Se deconnecter</span>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+              </svg>
+              Se deconnecter</span
+            >
           </t-button>
         </li>
       </ul>

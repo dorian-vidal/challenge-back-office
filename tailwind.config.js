@@ -253,7 +253,7 @@ module.exports = {
     },
     linearGradientColors: {
       // defaults to {}
-      vroom: ["#20D8D2", "#8CECC7"],
+      mt4challenge: ["#20D8D2", "#8CECC7"],
       "blue-to-turquoise": ["#03BDDF", "#0596DE"],
       "blue-light-hover": ["#019dba", "#11689e"],
       "gradient-primary": ["#60EDE5", "#107ACA"],
