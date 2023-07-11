@@ -39,26 +39,6 @@
             </td>
           </tr>
         </template>
-        <template
-          slot="tfoot"
-          slot-scope="{ tfootClass, trClass, tdClass, renderResponsive }"
-        >
-          <tfoot :class="tfootClass">
-            <tr :class="trClass">
-              <td :class="tdClass" :colspan="renderResponsive ? 2 : 4">
-                <t-pagination
-                  :hide-prev-next-controls="renderResponsive"
-                  :total-items="100"
-                  :per-page="renderResponsive ? 3 : 5"
-                  :class="{
-                    'ml-auto': !renderResponsive,
-                    'mx-auto': renderResponsive,
-                  }"
-                />
-              </td>
-            </tr>
-          </tfoot>
-        </template>
       </t-table>
       <br />
     </div>
@@ -85,13 +65,17 @@ export default {
   },
   methods: {
     getUsers() {
+      const promoSlug = this.$route.params.promo_slug;
       axios
-        .get("https://mt4challenge.onrender.com/back-office/students", {
-          headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${this.$cookies.get("cookie-token")}`,
-          },
-        })
+        .get(
+          `https://mt4challenge.onrender.com/back-office/students?promo_slug=${promoSlug}`,
+          {
+            headers: {
+              Accept: "application/json",
+              Authorization: `Bearer ${this.$cookies.get("cookie-token")}`,
+            },
+          }
+        )
         .then((response) => {
           this.tableData = response.data;
           this.success = true;

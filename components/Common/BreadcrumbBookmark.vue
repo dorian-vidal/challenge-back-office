@@ -6,7 +6,7 @@
           <h3>{{ titlebreadcrumb }}</h3>
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <NuxtLink to="/">Dashboard</NuxtLink>
+              <NuxtLink to="/dashboard">Dashboard</NuxtLink>
             </li>
             <li v-if="breadcrumb_item_parent" class="breadcrumb-item">{{breadcrumb_item_parent}}</li>
             <li v-if="breadcrumb_item_active" class="breadcrumb-item active">{{breadcrumb_item_active}}</li>

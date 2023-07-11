@@ -15,7 +15,7 @@
       </div>
       <div class="page-body-wrapper null">
         <!-- Page Sidebar Start-->
-        <div v-if="$route.name !== 'index'"><MainNav /></div>
+        <!-- <div v-if="$route.name !== 'index'"><MainNav /></div> -->
         <!-- Page Sidebar Ends-->
         <div class="page-body pt-[30px] lg:pt-[100px]">
           <transition name="fade">
