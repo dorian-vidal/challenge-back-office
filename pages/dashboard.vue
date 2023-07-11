@@ -9,13 +9,20 @@
           bookmark_active="true"
         />
       </div>
-      <!-- <button
-        class="btn btn-export mb-4 text-white"
-        @click="closeChallenge"
-        type="submit"
-      >
-        Fermer le challenge
-      </button> -->
+      <label class="relative inline-flex items-center cursor-pointer">
+        <input
+          @click="closeChallenge"
+          type="checkbox"
+          v-model="is_disabled"
+          class="sr-only peer mb-4"
+        />
+        <div
+          class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+        ></div>
+        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >Fermer le challenge</span
+        >
+      </label>
       <t-table
         v-if="tableData"
         :headers="['Nom', 'Id fonctionnel', `Nombre d'étudiants`]"
@@ -142,6 +149,7 @@ export default {
   data() {
     return {
       token: null,
+      is_disabled: false,
       tableData: null,
       form: {
         name: "",
@@ -158,6 +166,22 @@ export default {
   },
   mounted() {
     this.getUsers();
+    axios
+      .get(
+        "https://mt4challenge.onrender.com/back-office/challenge/is-disabled",
+        {
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${this.$cookies.get("cookie-token")}`,
+          },
+        }
+      )
+      .then((response) => {
+        this.is_disabled = response.data.is_disabled;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   },
   methods: {
     getUsers() {
@@ -187,9 +211,6 @@ export default {
 
     // MODAL / FORM
     submitPromos() {
-      // const formData = {
-      //   email: this.form.email,
-      // };
       axios
         .post(
           "https://mt4challenge.onrender.com/back-office/promo",
@@ -209,6 +230,32 @@ export default {
             slug: this.form.slug,
             students_count: 0,
           });
+          console.log(response);
+        })
+        .catch((error) => {
+          this.success = false;
+          this.error = true;
+        });
+    },
+    closeChallenge() {
+      const formData = {
+        is_disabled: !this.is_disabled,
+      };
+      axios
+        .put(
+          "https://mt4challenge.onrender.com/back-office/challenge/set-is-disabled",
+          formData,
+          {
+            headers: {
+              Accept: "application/json",
+              Authorization: `Bearer ${this.$cookies.get("cookie-token")}`,
+            },
+          }
+        )
+        .then((response) => {
+          this.success = true;
+          this.error = false;
+          // this.is_disabled = true;
           console.log(response);
         })
         .catch((error) => {
