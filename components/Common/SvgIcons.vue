@@ -169,14 +169,14 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+// import { mapGetters } from "vuex";
 
 export default {
   name: "SvgIcons",
   computed: {
-    ...mapGetters({
-      slug: "global/getSlug",
-    }),
+    // ...mapGetters({
+    //   slug: "global/getSlug",
+    // }),
   },
 };
 </script>

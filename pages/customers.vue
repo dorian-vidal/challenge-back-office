@@ -9,9 +9,12 @@
           bookmark_active="true"
         />
       </div>
-      <button class="btn btn-export mb-4 text-white" @click="exportToExcel">Exporter vers Excel</button>
+      <button class="btn btn-export mb-4 text-white" @click="exportToExcel">
+        Exporter vers Excel
+      </button>
 
-      <t-table v-if="tableData"
+      <t-table
+        v-if="tableData"
         :headers="['Prénom', 'Nom', 'Email', 'Score']"
         :data="tableData"
       >
@@ -23,10 +26,10 @@
             ]"
           >
             <td :class="props.tdClass">
-              {{ props.row.firstname }}
+              {{ props.row.first_name }}
             </td>
             <td :class="props.tdClass">
-              {{ props.row.lastname }}
+              {{ props.row.last_name }}
             </td>
             <td :class="props.tdClass">
               {{ props.row.email }}
@@ -65,6 +68,7 @@
 <script>
 import * as XLSX from "xlsx";
 import BreadcrumbBookmark from "@/components/Common/BreadcrumbBookmark";
+import axios from "axios";
 
 export default {
   name: "Students",
@@ -76,39 +80,29 @@ export default {
       tableData: null,
     };
   },
-  mounted(){
-    this.getUsers()
+  mounted() {
+    this.getUsers();
   },
   methods: {
     getUsers() {
-      this.tableData= [{
-        firstname : 'mt4', 
-        lastname: 'mt4', 
-        email: 'amanda@gmail.com',
-        score: 1
-      },
-      {
-        firstname : 'mt4', 
-        lastname: 'mt4', 
-        email: 'amanda@gmail.com',
-        score: 1
-      },
-      {
-        firstname : 'mt4', 
-        lastname: 'mt4', 
-        email: 'amanda@gmail.com',
-        score: 1
-      }
-]
-      
-    // axios.get('URL_DE_L_API')
-    //   .then(response => {
-    //     this.tableData = response.data;
-    //   })
-    //   .catch(error => {
-    //     console.error(error);
-    //   });
-  },
+      axios
+        .get("https://mt4challenge.onrender.com/back-office/students", {
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${this.$cookies.get("cookie-token")}`,
+          },
+        })
+        .then((response) => {
+          this.tableData = response.data;
+          this.success = true;
+          this.error = false;
+          console.log(response.data);
+        })
+        .catch((error) => {
+          this.success = false;
+          this.error = true;
+        });
+    },
     exportToExcel() {
       const worksheet = XLSX.utils.json_to_sheet(this.tableData);
       const workbook = XLSX.utils.book_new();
@@ -117,7 +111,9 @@ export default {
         bookType: "xlsx",
         type: "array",
       });
-      const data = new Blob([excelBuffer], { type: "application/octet-stream" });
+      const data = new Blob([excelBuffer], {
+        type: "application/octet-stream",
+      });
       const fileName = "students.xlsx";
       if (navigator.msSaveBlob) {
         navigator.msSaveBlob(data, fileName);
@@ -132,7 +128,7 @@ export default {
 };
 </script>
 <style>
-.btn-export:after{
-  z-index : -1 
+.btn-export:after {
+  z-index: -1;
 }
 </style>

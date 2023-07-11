@@ -9,8 +9,15 @@
           bookmark_active="true"
         />
       </div>
-
-      <t-table v-if="tableData"
+      <!-- <button
+        class="btn btn-export mb-4 text-white"
+        @click="closeChallenge"
+        type="submit"
+      >
+        Fermer le challenge
+      </button> -->
+      <t-table
+        v-if="tableData"
         :headers="['Nom', 'Id fonctionnel', `Nombre d'étudiants`]"
         :data="tableData"
       >
@@ -65,9 +72,10 @@
             data-success="Thanks for your enquiry, we'll be in touch shortly."
             data-error="Please fill in all fields correctly."
             @submit.prevent="submitPromos"
-            v-bind:value="value"
             v-on:input="updateValue($event.target.value)"
           >
+            <!-- v-bind:value="value" -->
+
             <div class="grid px-8 md:px-12 md:grid-cols-2 md:gap-8">
               <base-input-text
                 type="text"
@@ -80,15 +88,15 @@
               />
               <base-input-text
                 type="text"
-                namefor="lastname"
-                label="Prénom"
+                namefor="slug"
+                label="Id fonctionnel"
                 placeholder=" "
                 :required="true"
-                v-model="form.lastname"
+                v-model="form.slug"
               />
             </div>
 
-            <p
+            <!-- <p
               v-if="this.success"
               class="px-8 py-8 text-primary-vert1 md:px-12 md:py-12"
             >
@@ -100,12 +108,17 @@
               class="px-8 py-8 text-red-500 md:px-12 md:py-12"
             >
               Ah ! une erreur est survenue...
-            </p>
+            </p> -->
 
             <div
               class="flex justify-between px-8 py-8 mt-8 border-t border-gray-100 rounded-b md:py-12 md:px-12 bg-grey-light"
             >
-              <t-button type="submit" variant="primary" class="w-full">
+              <t-button
+                @click="submitPromos"
+                type="submit"
+                variant="primary"
+                class="w-full"
+              >
                 <span>Envoyer</span>
               </t-button>
             </div>
@@ -128,15 +141,11 @@ export default {
   },
   data() {
     return {
-      showModal: false,
+      token: null,
       tableData: null,
       form: {
         name: "",
-        lastname: "",
-        phone: "",
-        mail: "",
-        profil: "",
-        text: "",
+        slug: "",
       },
     };
   },
@@ -147,38 +156,30 @@ export default {
       },
     };
   },
-  mounted(){
-    this.getUsers()
+  mounted() {
+    this.getUsers();
   },
   methods: {
     getUsers() {
-      this.tableData= [{
-        name : 'mt4', 
-        slug: 'mt4', 
-        students_count: 1
-      },
-      {
-        name : 'mt5', 
-        slug: 'mt5', 
-        students_count: 2
-      },
-      {
-        name : 'mt6', 
-        slug: 'mt6', 
-        students_count: 3
+      const token = this.$route.query.token;
+      if (token) {
+        this.$cookies.set("cookie-token", this.$route.query.token);
       }
-]
-console.log(this.tableData)
 
-      
-  //   axios.get('URL_DE_L_API')
-  //     .then(response => {
-  //       this.tableData = response.data;
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //     });
-  },
+      axios
+        .get("https://mt4challenge.onrender.com/back-office/promo", {
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${this.$cookies.get("cookie-token")}`,
+          },
+        })
+        .then((response) => {
+          this.tableData = response.data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
 
     updateValue: function (value) {
       this.$emit("input", value);
@@ -186,26 +187,33 @@ console.log(this.tableData)
 
     // MODAL / FORM
     submitPromos() {
+      // const formData = {
+      //   email: this.form.email,
+      // };
       axios
-        .post("/contact", this.form)
-        .then((res) => {
-          //Perform Success Action
-          console.log("res", res);
-          this.status = "res";
-          this.$router.push("/");
+        .post(
+          "https://mt4challenge.onrender.com/back-office/promo",
+          this.form,
+          {
+            headers: {
+              Accept: "application/json",
+              Authorization: `Bearer ${this.$cookies.get("cookie-token")}`,
+            },
+          }
+        )
+        .then((response) => {
           this.success = true;
-          setTimeout(() => {
-            this.showModal = false;
-          }, 3000);
+          this.error = false;
+          this.tableData.push({
+            name: this.form.name,
+            slug: this.form.slug,
+            students_count: 0,
+          });
+          console.log(response);
         })
         .catch((error) => {
-          // error.response.status Check status code
-          console.log("error", error);
-          this.status = "error";
-          this.success = true;
-        })
-        .finally(() => {
-          //Perform action in always
+          this.success = false;
+          this.error = true;
         });
     },
   },

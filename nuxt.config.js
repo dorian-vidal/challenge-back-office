@@ -88,6 +88,7 @@ export default {
     "@nuxtjs/auth",
     "@nuxt/image",
     "nuxt-svg-loader",
+    "cookie-universal-nuxt",
   ],
   // Purge module configuration: https://purgecss.com/guides/nuxt.html
   purgeCSS: {
