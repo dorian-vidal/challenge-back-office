@@ -39,7 +39,7 @@
               {{ props.row.name }}
             </td>
             <td :class="props.tdClass">
-              <nuxt-link :to="`customers/${props.row.slug}`">{{
+              <nuxt-link :to="`/customers/${props.row.slug}`">{{
                 props.row.slug
               }}</nuxt-link>
             </td>
