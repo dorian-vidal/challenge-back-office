@@ -11,10 +11,10 @@
       </div>
       <label class="relative inline-flex items-center cursor-pointer">
         <input
-          @click="closeChallenge"
-          type="checkbox"
           v-model="is_disabled"
+          type="checkbox"
           class="sr-only peer mb-4"
+          @click="closeChallenge"
         />
         <div
           class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
@@ -25,7 +25,7 @@
       </label>
       <t-table
         v-if="tableData"
-        :headers="['Nom', 'Id fonctionnel', `Nombre d'étudiants`]"
+        :headers="['Nom de la promo', 'Id fonctionnel', `Nombre d'étudiants`]"
         :data="tableData"
       >
         <template slot="row" slot-scope="props">
@@ -39,32 +39,14 @@
               {{ props.row.name }}
             </td>
             <td :class="props.tdClass">
-              {{ props.row.slug }}
+              <nuxt-link :to="`customers/${props.row.slug}`">{{
+                props.row.slug
+              }}</nuxt-link>
             </td>
             <td :class="props.tdClass">
               {{ props.row.students_count }}
             </td>
           </tr>
-        </template>
-        <template
-          slot="tfoot"
-          slot-scope="{ tfootClass, trClass, tdClass, renderResponsive }"
-        >
-          <tfoot :class="tfootClass">
-            <tr :class="trClass">
-              <td :class="tdClass" :colspan="renderResponsive ? 2 : 4">
-                <t-pagination
-                  :hide-prev-next-controls="renderResponsive"
-                  :total-items="100"
-                  :per-page="renderResponsive ? 3 : 5"
-                  :class="{
-                    'ml-auto': !renderResponsive,
-                    'mx-auto': renderResponsive,
-                  }"
-                />
-              </td>
-            </tr>
-          </tfoot>
         </template>
       </t-table>
       <br />
@@ -74,59 +56,40 @@
           class="center-content card__section p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
         >
           <form
-            action="post"
             class="mt-8"
             data-success="Thanks for your enquiry, we'll be in touch shortly."
             data-error="Please fill in all fields correctly."
-            @submit.prevent="submitPromos"
-            v-on:input="updateValue($event.target.value)"
+            @input="updateValue($event.target.value)"
           >
-            <!-- v-bind:value="value" -->
-
             <div class="grid px-8 md:px-12 md:grid-cols-2 md:gap-8">
               <base-input-text
+                v-model="form.name"
                 type="text"
                 namefor="name"
                 label="Nom"
                 placeholder=" "
                 :required="true"
                 class="md:mr-8"
-                v-model="form.name"
               />
               <base-input-text
+                v-model="form.slug"
                 type="text"
                 namefor="slug"
                 label="Id fonctionnel"
                 placeholder=" "
                 :required="true"
-                v-model="form.slug"
               />
             </div>
-
-            <!-- <p
-              v-if="this.success"
-              class="px-8 py-8 text-primary-vert1 md:px-12 md:py-12"
-            >
-              Merci, votre message a bien été envoyé. <br />
-              Un de nos conseillers vous contactera sous 72h.
-            </p>
-            <p
-              v-if="this.error"
-              class="px-8 py-8 text-red-500 md:px-12 md:py-12"
-            >
-              Ah ! une erreur est survenue...
-            </p> -->
-
             <div
               class="flex justify-between px-8 py-8 mt-8 border-t border-gray-100 rounded-b md:py-12 md:px-12 bg-grey-light"
             >
               <t-button
-                @click="submitPromos"
                 type="submit"
                 variant="primary"
                 class="w-full"
+                @click="submitPromos"
               >
-                <span>Envoyer</span>
+                <span>Créer une nouvelle promo</span>
               </t-button>
             </div>
           </form>
@@ -166,24 +129,27 @@ export default {
   },
   mounted() {
     this.getUsers();
-    axios
-      .get(
-        "https://mt4challenge.onrender.com/back-office/challenge/is-disabled",
-        {
-          headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${this.$cookies.get("cookie-token")}`,
-          },
-        }
-      )
-      .then((response) => {
-        this.is_disabled = response.data.is_disabled;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    this.getIsDisabledChallenge();
   },
   methods: {
+    getIsDisabledChallenge() {
+      axios
+        .get(
+          "https://mt4challenge.onrender.com/back-office/challenge/is-disabled",
+          {
+            headers: {
+              Accept: "application/json",
+              Authorization: `Bearer ${this.$cookies.get("cookie-token")}`,
+            },
+          }
+        )
+        .then((response) => {
+          this.is_disabled = response.data.is_disabled;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
     getUsers() {
       const token = this.$route.query.token;
       if (token) {
@@ -210,7 +176,8 @@ export default {
     },
 
     // MODAL / FORM
-    submitPromos() {
+    submitPromos(e) {
+      e.preventDefault();
       axios
         .post(
           "https://mt4challenge.onrender.com/back-office/promo",
@@ -222,7 +189,7 @@ export default {
             },
           }
         )
-        .then((response) => {
+        .then(() => {
           this.success = true;
           this.error = false;
           this.tableData.push({
@@ -230,11 +197,14 @@ export default {
             slug: this.form.slug,
             students_count: 0,
           });
-          console.log(response);
+          // reset form
+          this.form.name = null;
+          this.form.slug = null;
         })
         .catch((error) => {
           this.success = false;
           this.error = true;
+          console.error(error);
         });
     },
     closeChallenge() {

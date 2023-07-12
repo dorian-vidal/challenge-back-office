@@ -11,7 +11,6 @@
         class="mt-8"
         data-success="Thanks for your enquiry, we'll be in touch shortly."
         data-error="Please fill in all fields correctly."
-        @submit.prevent="login"
       >
         <div class="flex flex-col md:py-12 md:px-12">
           <base-input-text
@@ -39,7 +38,7 @@
           class="flex justify-between py-8 mt-8 bg-transparent border-t border-gray-100 rounded-b md:px-12 bg-grey-light"
         >
           <t-button
-            @click="login()"
+            @click="login"
             type="submit"
             variant="primary"
             class="w-full py-3 transitions-colors"
@@ -97,7 +96,8 @@ export default {
     };
   },
   methods: {
-    login() {
+    login(e) {
+      e.preventDefault();
       const formData = {
         email: this.form.email,
       };
