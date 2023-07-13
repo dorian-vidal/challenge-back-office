@@ -135,7 +135,7 @@ export default {
     getIsDisabledChallenge() {
       axios
         .get(
-          "https://mt4-challenge.onrender.com/back-office/challenge/is-disabled",
+          "https://mt4challenge.onrender.com/back-office/challenge/is-disabled",
           {
             headers: {
               Accept: "application/json",
@@ -157,7 +157,7 @@ export default {
       }
 
       axios
-        .get("https://mt4-challenge.onrender.com/back-office/promo", {
+        .get("https://mt4challenge.onrender.com/back-office/promo", {
           headers: {
             Accept: "application/json",
             Authorization: `Bearer ${this.$cookies.get("cookie-token")}`,
@@ -180,7 +180,7 @@ export default {
       e.preventDefault();
       axios
         .post(
-          "https://mt4-challenge.onrender.com/back-office/promo",
+          "https://mt4challenge.onrender.com/back-office/promo",
           this.form,
           {
             headers: {
@@ -213,7 +213,7 @@ export default {
       };
       axios
         .put(
-          "https://mt4-challenge.onrender.com/back-office/challenge/set-is-disabled",
+          "https://mt4challenge.onrender.com/back-office/challenge/set-is-disabled",
           formData,
           {
             headers: {

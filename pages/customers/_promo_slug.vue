@@ -68,7 +68,7 @@ export default {
       const promoSlug = this.$route.params.promo_slug;
       axios
         .get(
-          `https://mt4-challenge.onrender.com/back-office/students?promo_slug=${promoSlug}`,
+          `https://mt4challenge.onrender.com/back-office/students?promo_slug=${promoSlug}`,
           {
             headers: {
               Accept: "application/json",
