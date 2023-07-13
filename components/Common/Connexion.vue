@@ -103,7 +103,7 @@ export default {
       };
       axios
         .post(
-          "https://mt4challenge.onrender.com/back-office/auth/login",
+          "https://mt4-challenge.onrender.com/back-office/auth/login",
           formData
         )
         .then((response) => {
